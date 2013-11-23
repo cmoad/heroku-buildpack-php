@@ -17,8 +17,8 @@ Pre-compiling binaries
 
 On a Heroku Dyno, one can run the following as executable text.  After
 running it, `/app` will contain, among other entities,
-`apache-2.2.25-1.tar.gz`, `php-5.3.27-1.tar.gz`, and
-`mcrypt-2.5.8-1.tar.gz` which should be uploaded to a location that
+`apache-2.2.26-1.tar.gz`, `php-5.4.22-1.tar.gz`, and
+`mcrypt-2.6.8-1.tar.gz` which should be uploaded to a location that
 can be downloaded by the build pack (see the URIs in `compile`).
 
     #!/bin/bash
@@ -29,21 +29,21 @@ can be downloaded by the build pack (see the URIs in `compile`).
     #
     # Affixed to all vendored binary output to represent changes to the
     # compilation environment without a change to the upstream version,
-    # e.g. PHP 5.3.27 without, and then subsequently with, libmcrypt.
-    heroku_rev='-2'
+    # e.g. PHP 5.4.22 without, and then subsequently with, libmcrypt.
+    heroku_rev='-1'
 
     # Clear /app directory
     find /app -mindepth 1 -print0 | xargs -0 rm -rf
 
     # Take care of vendoring libmcrypt
-    mcrypt_version=2.5.8
+    mcrypt_version=2.6.8
     mcrypt_dirname=libmcrypt-$mcrypt_version
     mcrypt_archive_name=$mcrypt_dirname.tar.bz2
 
     # Download mcrypt if necessary
     if [ ! -f mcrypt_archive_name ]
     then
-        curl -Lo $mcrypt_archive_name http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.5.8/libmcrypt-2.5.8.tar.bz2/download
+        curl -Lo $mcrypt_archive_name http://sourceforge.net/projects/mcrypt/files/Libmcrypt/2.6.8/libmcrypt-2.6.8.tar.bz2/download
     fi
 
     # Clean and extract mcrypt
@@ -59,7 +59,7 @@ can be downloaded by the build pack (see the URIs in `compile`).
     popd
 
     # Take care of vendoring Apache.
-    httpd_version=2.2.25
+    httpd_version=2.2.26
     httpd_dirname=httpd-$httpd_version
     httpd_archive_name=$httpd_dirname.tar.bz2
 
@@ -81,14 +81,14 @@ can be downloaded by the build pack (see the URIs in `compile`).
     popd
 
     # Take care of vendoring PHP.
-    php_version=5.3.27
+    php_version=5.4.22
     php_dirname=php-$php_version
     php_archive_name=$php_dirname.tar.bz2
 
     # Download PHP if necessary.
     if [ ! -f $php_archive_name ]
     then
-        curl -Lo $php_archive_name http://us1.php.net/get/php-5.3.27.tar.bz2/from/www.php.net/mirror
+        curl -Lo $php_archive_name http://us1.php.net/get/php-5.4.22.tar.bz2/from/www.php.net/mirror
     fi
 
     # Clean and extract PHP.
