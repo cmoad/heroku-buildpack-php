@@ -12,10 +12,10 @@ set -e
 heroku_rev='-2'
 
 # config
-MCRYPT_VERSION="2.5.8"
-APACHE_VERSION="2.2.25"
+MCRYPT_VERSION="2.6.8"
+APACHE_VERSION="2.2.26"
 APACHE_PATH="apache"
-PHP_VERSION="5.3.27"
+PHP_VERSION="5.4.22"
 PHP_PATH="php"
 
 BIN_DIR=$(dirname $0)
